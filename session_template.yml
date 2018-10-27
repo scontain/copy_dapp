@@ -1,0 +1,30 @@
+name: $SESSION
+digest: create
+
+services:
+   - name: application
+     image_name: sconecuratedimages/iexec:scone_demo
+     mrenclaves: [$MRENCLAVE]
+     tags: [demo]
+     command: /application
+     pwd: /
+     environment:
+        SCONE_MODE: hw
+
+volumes:
+   - name: encrypted-input-files
+     fspf_tag: $INPUT_FSPF_TAG
+     fspf_key: $INPUT_FSPF_KEY
+   - name: encrypted-output-files
+     fspf_tag: $OUTPUT_FSPF_TAG
+     fspf_key: $OUTPUT_FSPF_KEY
+
+images:
+   - name: sconecuratedimages/iexec:scone_demo
+     mrenclaves: [$MRENCLAVE]
+     tags: [demo]
+     volumes:
+        - name: encrypted-input-files
+          path: /encryptedInputs
+        - name: encrypted-output-files
+          path: /encryptedOutputs
