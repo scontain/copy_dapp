@@ -34,7 +34,7 @@ docker build --pull -t sconecuratedimages/iexec:copy_demo .
 echo "todo: push image to docker hub"
 
 # not that SCONE_STACK and SCONE_HEAPmust show the same values as define in application.sh - otherwise, MrEnclave will be different!
-MRENCLAVE=$(docker run -t --rm --entrypoint "" -e SCONE_ALPINE=1 -e SCONE_STACK=4M -e SCONE_HEAP=40M -e SCONE_HASH=1 sconecuratedimages/iexec:scone_demo /application)
+MRENCLAVE=$(docker run -t --rm --entrypoint "" -e SCONE_ALPINE=1 -e SCONE_STACK=4M -e SCONE_HEAP=40M -e SCONE_HASH=1 sconecuratedimages/iexec:copy_demo /application)
 
 verbose "MRENCLAVE=${MRENCLAVE}"
 

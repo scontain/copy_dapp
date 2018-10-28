@@ -110,6 +110,7 @@ static int ptree(char *curpath, char * const path, const char* prefix, int index
                         return -1;
                 }
                 if (S_ISREG(st.st_mode)) {
+                    if (strcmp(entry.d_name, "volume.fspf") != 0) {
                         ep[sizeof(ep)-1]=0;
                         snprintf(to, sizeof(to), "%s/%s", prefix, &ep[index]);
                         printf("copying file %s to %s\n", ep, to);
@@ -117,6 +118,7 @@ static int ptree(char *curpath, char * const path, const char* prefix, int index
                             printf("Error copying file '%s'\n", ep);
                             exit(1);
                         }
+                    }
                 }
                 if (S_ISDIR(st.st_mode) == 0)
                         continue;

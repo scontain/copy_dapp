@@ -3,13 +3,14 @@ digest: create
 
 services:
    - name: application
-     image_name: sconecuratedimages/iexec:scone_demo
+     image_name: sconecuratedimages/iexec:copy_demo
      mrenclaves: [$MRENCLAVE]
      tags: [demo]
      command: /application
      pwd: /
      environment:
         SCONE_MODE: hw
+        ZIP_URL: $URL
 
 volumes:
    - name: encrypted-input-files
@@ -20,7 +21,7 @@ volumes:
      fspf_key: $OUTPUT_FSPF_KEY
 
 images:
-   - name: sconecuratedimages/iexec:scone_demo
+   - name: sconecuratedimages/iexec:copy_demo
      mrenclaves: [$MRENCLAVE]
      tags: [demo]
      volumes:
