@@ -1,8 +1,25 @@
-// Simple Copying of Files
+// copy_files.c
+//
+// Trusted DApps that copies from encrypted input directory 
+// to an encrypted output directory.
+//
+// Note that the files will be transparently be decrypted on read and
+// transparently be encrypted on write. This will ensure not only the
+// confidentiality but also the integrity of the copied files. 
 //
 
 #include <stdio.h>
 #include <stdlib.h>
+
+/* read_file
+*
+*  reads a file into a buffer and returns the buffer
+*  and returns the size in argument *size
+*
+*  returns NULL on error
+*
+*  expects the call to free the allocated buffer
+*/
 
 char* read_file(const char* filename, size_t* size) {
     *size=-1;
@@ -32,6 +49,15 @@ char* read_file(const char* filename, size_t* size) {
     return string;
 }
 
+/* write_file
+*
+*  writes a file passed in as a buffer with a given size
+*
+*  returns 0 on error
+*
+*  frees the buffer unless an error occurred
+*/
+
 int write_file(const char* filename, char* buf, size_t size) {
     FILE *f = fopen(filename, "w");
     if (!f) {
@@ -47,6 +73,15 @@ int write_file(const char* filename, char* buf, size_t size) {
     fclose(f);
     return 1;
 }
+
+/*
+*  copy_file
+*
+*  copies a given file *from* to *to*
+*
+*  returns 0 on error
+*  returns 1 on success
+*/
 
 int copy_file(const char* from, const char* to) {
     size_t size=0;
@@ -69,6 +104,11 @@ int copy_file(const char* from, const char* to) {
  #include <stdio.h>
  #include <string.h>
 
+/*
+*  ptree
+*
+*  iterates over all files in a directory and calls copy for all files found
+*/
 
 static int ptree(char *curpath, char * const path, const char* prefix, int index) {
         char ep[PATH_MAX];
@@ -132,6 +172,14 @@ static int ptree(char *curpath, char * const path, const char* prefix, int index
         closedir(dirp);
         return 0;
 }
+
+/*
+* copyies files from directory  "/encryptedInputs" to "/encryptedOutputs"
+*
+* note that the files in "/encryptedInputs" will be transparently decrypted by SCONE
+* note that the files in "/encryptedOutputs" will be transparently encrypted by SCONE
+*/
+
 int main(int argc, char** argv) {
     printf("%s: # arguments = %d", argv[0], argc);
     for (int i = 1 ; i < argc ; ++i)
