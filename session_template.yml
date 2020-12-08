@@ -1,11 +1,10 @@
 name: $SESSION
-digest: create
+version: "0.3"
 
 services:
    - name: application
-     image_name: sconecuratedimages/iexec:copy_demo
+     image_name: sconecuratedimages/dapps:copy_demo
      mrenclaves: [$MRENCLAVE]
-     tags: [demo]
      command: /application
      pwd: /
      environment:
@@ -21,11 +20,14 @@ volumes:
      fspf_key: $OUTPUT_FSPF_KEY
 
 images:
-   - name: sconecuratedimages/iexec:copy_demo
-     mrenclaves: [$MRENCLAVE]
-     tags: [demo]
+   - name: sconecuratedimages/dapps:copy_demo
      volumes:
         - name: encrypted-input-files
           path: /encryptedInputs
         - name: encrypted-output-files
           path: /encryptedOutputs
+
+security:
+  attestation:
+    tolerate: [debug-mode, hyperthreading, outdated-tcb]
+    ignore_advisories: "*"
