@@ -1,4 +1,4 @@
-FROM sconecuratedimages/muslgcc
+FROM sconecuratedimages/muslgcc:alpine
 
 COPY copy_files.c  /
 
