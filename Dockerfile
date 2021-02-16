@@ -1,4 +1,4 @@
-FROM registry.scontain.com:5050/sconecuratedimages/muslgcc
+FROM registry.scontain.com:5050/sconecuratedimages/muslgcc:alpine
 
 COPY copy_files.c  /
 
