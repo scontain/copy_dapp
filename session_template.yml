@@ -3,7 +3,7 @@ version: "0.3"
 
 services:
    - name: application
-     image_name: registry.scontain.com:5050/sconecuratedimages/dapps:copy_demo
+     image_name: registry.scontain.com/sconecuratedimages/dapps:copy_demo
      mrenclaves: [$MRENCLAVE]
      command: /application
      pwd: /
@@ -20,7 +20,7 @@ volumes:
      fspf_key: $OUTPUT_FSPF_KEY
 
 images:
-   - name: registry.scontain.com:5050/sconecuratedimages/dapps:copy_demo
+   - name: registry.scontain.com/sconecuratedimages/dapps:copy_demo
      volumes:
         - name: encrypted-input-files
           path: /encryptedInputs

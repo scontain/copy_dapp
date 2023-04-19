@@ -29,17 +29,17 @@ function verbose {
 
 verbose "building simple_demo image"
 
-docker build --pull -t registry.scontain.com:5050/sconecuratedimages/dapps:copy_demo .
+docker build --pull -t registry.scontain.com/sconecuratedimages/dapps:copy_demo .
 #export DOCKER_CONTENT_TRUST=1
 if [[ $1 == "-p" ]] ; then
-  docker push registry.scontain.com:5050/sconecuratedimages/dapps:copy_demo
+  docker push registry.scontain.com/sconecuratedimages/dapps:copy_demo
 else
-  printf "${RED}Not pushing generated image registry.scontain.com:5050/sconecuratedimages/dapps:copy_demo: use -p to push image${NC}\n"
+  printf "${RED}Not pushing generated image registry.scontain.com/sconecuratedimages/dapps:copy_demo: use -p to push image${NC}\n"
 fi
 #export DOCKER_CONTENT_TRUST=0
 
 # not that SCONE_STACK and SCONE_HEAPmust show the same values as define in application.sh - otherwise, MrEnclave will be different!
-MRENCLAVE=$(docker run -t --rm --entrypoint "" -e SCONE_LOG=error -e SCONE_ALPINE=1 -e SCONE_STACK=4M -e SCONE_HEAP=40M -e SCONE_HASH=1 registry.scontain.com:5050/sconecuratedimages/dapps:copy_demo /application)
+MRENCLAVE=$(docker run -t --rm --entrypoint "" -e SCONE_LOG=error -e SCONE_ALPINE=1 -e SCONE_STACK=4M -e SCONE_HEAP=40M -e SCONE_HASH=1 registry.scontain.com/sconecuratedimages/dapps:copy_demo /application)
 
 verbose "MRENCLAVE=${MRENCLAVE}"
 
