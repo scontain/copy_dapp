@@ -29,5 +29,5 @@ images:
 
 security:
   attestation:
-    tolerate: [debug-mode, hyperthreading, outdated-tcb]
+    tolerate: [debug-mode, hyperthreading, outdated-tcb, insecure-configuration, software-hardening-needed, aepic-leak, insecure-igpu]
     ignore_advisories: "*"
